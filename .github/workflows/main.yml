@@ -1,0 +1,36 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: |
+          cd ../react_project
+          npm install
+
+      - name: Run Tests
+        run: |
+          
+          cd ../react_project
+          npm test
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Build and Deploy
+         run: cp /home/muhammadahmedali/actions-runner
+          # Add deployment steps here (e.g., deploying to a server)
