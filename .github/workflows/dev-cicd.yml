@@ -27,11 +27,11 @@ jobs:
   
       - name: Build & Push Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/services:${{ github.sha }} .
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/services:${{ github.sha }}
+          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/services:latest .
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/services:latest
 
       - name: Deploy to ECS
-        id: task-def
+        id: task-def 
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: aakanksha.json
