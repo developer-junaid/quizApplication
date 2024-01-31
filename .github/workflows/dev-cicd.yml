@@ -1,55 +1,3 @@
-# name: Development Workflow
-
-# on:
-#   workflow_dispatch:
-
-# jobs:
-#   build-and-deploy:
-#     name: Build and Deploy
-#     runs-on: ubuntu-latest
-
-#     steps:
-#       - name: Checkout Repository
-#         uses: actions/checkout@v2
-
-#       - name: Setup Node.js
-#         uses: actions/setup-node@v2
-#         with:
-#           node-version: '14'
-
-#       - name: Install Dependencies
-#         run: npm install
-
-#       - name: Build Docker Image
-#         run: docker build -t quiz-application .
-
-#       - name: Login to DockerHub
-#         uses: docker/login-action@v2
-#         with:
-#           username: ${{ secrets.DOCKERHUB_USERNAME }}
-#           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-#       - name: Push Docker Image
-#         run: |
-#           docker tag quiz-application ${{ secrets.DOCKERHUB_USERNAME }}/quiz-application:latest
-#           docker push ${{ secrets.DOCKERHUB_USERNAME }}/quiz-application:latest
-
-#       - name: Deploy to ECS
-#         id: task-def
-#         uses: aws-actions/amazon-ecs-render-task-definition@v1
-#         with:
-#           task-definition: aakanksha.json
-#           container-name: react-js
-#           image: ${{ steps.build-image.outputs.image }}   
-
-#       - name: Deploy Amazon ECS task definition
-#         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
-#         with:
-#           task-definition: ${{ steps.task-def.outputs.task-definition }}
-#           service: aakanksha
-#           cluster: aakanksha-dev        
-
-
 name: Development Workflow
 
 on:
@@ -63,7 +11,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-      
+
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
@@ -72,26 +20,22 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-            username: ${{ secrets.DOCKER_HUB_USERNAME }}
-            password: ${{ secrets.DOCKER_HUB_TOKEN }}
-  
-      - name: Build & Push Docker Image
-        run: |
-          docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/services:latest
-          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/services:latest
+      - name: Build Docker Image
+        run: docker build -t quiz-application .
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v3
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: 'us-west-2'
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Push Docker Image
+        run: |
+          docker tag quiz-application ${{ secrets.DOCKERHUB_USERNAME }}/quiz-application:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/quiz-application:latest
 
       - name: Deploy to ECS
-        id: task-def 
+        id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: aakanksha.json
@@ -103,5 +47,4 @@ jobs:
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           service: aakanksha
-          cluster: aakanksha-dev
-
+          cluster: aakanksha-dev        
