@@ -1,10 +1,10 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-west-2:022608205880:task-definition/aakanksha:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-west-2:022608205880:task-definition/aakanksha:7",
     "containerDefinitions": [
         {
             "name": "react-js",
             "image": "aakankshasamota/quiz-application:latest",
-            "cpu": 0,
+            "cpu": 1024,
             "portMappings": [
                 {
                     "name": "react-js-80-tcp",
@@ -16,10 +16,8 @@
             ],
             "essential": true,
             "environment": [],
-            "environmentFiles": [],
             "mountPoints": [],
             "volumesFrom": [],
-            "ulimits": [],
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
@@ -36,7 +34,7 @@
     "taskRoleArn": "arn:aws:iam::022608205880:role/ecsExecutionRoleDockerHub",
     "executionRoleArn": "arn:aws:iam::022608205880:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 1,
+    "revision": 7,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -70,13 +68,13 @@
     "requiresCompatibilities": [
         "FARGATE"
     ],
-    "cpu": "256",
-    "memory": "512",
+    "cpu": "1024",
+    "memory": "2048",
     "runtimePlatform": {
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2024-01-31T16:34:50.339Z",
+    "registeredAt": "2024-02-01T11:09:20.721Z",
     "registeredBy": "arn:aws:sts::022608205880:assumed-role/AWSReservedSSO_AdministratorAccess_e7c8864d71e7ea3b/aakanksha.samota@kansocloud.com",
     "tags": []
 }
