@@ -47,7 +47,8 @@ jobs:
         with:
           task-definition: aakanksha.json
           container-name: react-js
-          image: ${{ steps.build-image.outputs.image }}   
+          image: aakankshasamota/quiz-application:latest
+          # image: ${{ steps.build-image.outputs.image }}   
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
