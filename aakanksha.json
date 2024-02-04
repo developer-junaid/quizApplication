@@ -34,7 +34,7 @@
     "taskRoleArn": "arn:aws:iam::022608205880:role/ecsExecutionRoleDockerHub",
     "executionRoleArn": "arn:aws:iam::022608205880:role/ecsTaskExecutionRole",
     "networkMode": "awsvpc",
-    "revision": 7,
+    "revision": 13,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
